@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston House Price Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #1CB5E0, #000046);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #d1e8ff;
+            animation: fadeIn 1.6s ease-in-out;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            width: 90%;
+            max-width: 650px;
+            animation: slideUp 1.2s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        input[type=number] {
+            width: 48%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #f3f3f3;
+            color: #333;
+            font-size: 1em;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input[type=number]:focus {
+            box-shadow: 0 0 5px #00c6ff;
+            outline: none;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type=submit]:hover {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            transform: scale(1.02);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 5px solid #00c6ff;
+            border-radius: 10px;
+            font-size: 1.2em;
+            color: #fff;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            input[type=number] {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Boston House Price Predictor</h1>
+        <p>Enter housing data below to estimate the price of a home in Boston</p>
+    </div>
+
+    <div class="card">
+        <form action="/predict" method="post">
+            <input type="number" step="any" name="CRIM" placeholder="CRIM" required>
+            <input type="number" step="any" name="ZN" placeholder="ZN" required>
+            <input type="number" step="any" name="INDUS" placeholder="INDUS" required>
+            <input type="number" step="any" name="CHAS" placeholder="CHAS" required>
+            <input type="number" step="any" name="NOX" placeholder="NOX" required>
+            <input type="number" step="any" name="RM" placeholder="RM" required>
+            <input type="number" step="any" name="AGE" placeholder="AGE" required>
+            <input type="number" step="any" name="DIS" placeholder="DIS" required>
+            <input type="number" step="any" name="RAD" placeholder="RAD" required>
+            <input type="number" step="any" name="TAX" placeholder="TAX" required>
+            <input type="number" step="any" name="PTRATIO" placeholder="PTRATIO" required>
+            <input type="number" step="any" name="B" placeholder="B" required>
+            <input type="number" step="any" name="LSTAT" placeholder="LSTAT" required>
+            <input type="submit" value="Predict House Price">
+        </form>
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
